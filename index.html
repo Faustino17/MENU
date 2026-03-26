@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-ao">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PONTUZ | Experiência Gastronómica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;800&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loginOverlay" class="p-hero-overlay">
+        <div class="p-logo-frame">
+            <span class="p-brand-label">RESTAURANTE</span>
+            <img src="LOGO PONTUZ.png" alt="Logo Pontuz" class="p-main-logo-center">
+            <h1 class="p-glitch-text" data-text="PONTUZ">PONTUZ</h1>
+        </div>
+        <div class="p-entry-box">
+            <p class="p-reveal-text">A essência de Talatona à sua mesa</p>
+            <div class="p-input-group">
+                <input type="number" id="mesa" placeholder="Nº MESA" min="1" max="16" onkeypress="if(event.key === 'Enter') entrar()">
+                <button onclick="entrar()" class="p-btn-enter">
+                    <span>REVELAR SABORES</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app" class="site-hidden">
+        <div id="cartOverlay" class="p-cart-overlay" onclick="toggleCart()"></div>
+
+        <header class="p-glass-nav">
+            <div class="p-nav-content">
+                <button onclick="voltarCategorias()" class="btn-nav-back"><i class="fas fa-chevron-left"></i></button>
+                <div class="p-logo-wrap">
+                    <img src="LOGO PONTUZ.png" alt="Logo" class="p-mini-logo">
+                    <span class="p-brand-name">PONTUZ</span>
+                </div>
+                <div class="p-mesa-badge" id="mesaDisplay" onclick="abrirMesaModal()">MESA --</div>
+            </div>
+        </header>
+
+        <nav id="categoriesNav" class="p-category-scroll">
+            <div class="p-tabs-container">
+                <button onclick="showTab('entradas', this)" class="p-tab-item active"><i>🥗</i><span>Entradas</span></button>
+                <button onclick="showTab('sopas', this)" class="p-tab-item"><i>🥣</i><span>Sopas</span></button>
+                <button onclick="showTab('carnes', this)" class="p-tab-item"><i>🥩</i><span>Carnes</span></button>
+                <button onclick="showTab('funge', this)" class="p-tab-item"><i>🍲</i><span>Funge</span></button>
+                <button onclick="showTab('peixes', this)" class="p-tab-item"><i>🐟</i><span>Peixes</span></button>
+                <button onclick="showTab('sobremesas', this)" class="p-tab-item"><i>🍰</i><span>Doces</span></button>
+            </div>
+        </nav>
+
+        <main class="p-wrapper">
+            <div id="menu" class="p-menu-grid"></div>
+        </main>
+
+        <footer class="p-luxury-footer">
+            <div class="p-social-icons">
+                <a href="tel:935233245" class="p-social-btn"><i class="fas fa-phone"></i></a>
+                <a href="https://instagram.com/pontuz_restaurante01" target="_blank" class="p-social-btn"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/244955002054" target="_blank" class="p-social-btn"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="p-footer-tag">EDIFÍCIO PONTUS - TALATONA</p>
+            <button onclick="convidarAmigos()" class="p-invite-btn"><i class="fas fa-user-plus"></i> CONVIDAR AMIGOS</button>
+        </footer>
+
+        <div id="mesaModal" class="p-modal-overlay" onclick="fecharMesaModal(event)">
+            <div class="p-modal-content">
+                <div class="p-modal-header">
+                    <i class="fas fa-concierge-bell"></i>
+                    <h3>SERVIÇOS MESA <span id="numMesaModal"></span></h3>
+                </div>
+                <div class="p-modal-grid">
+                    <button onclick="servicoRapido('CHAMAR GARÇOM', 'Por favor, venha até à minha mesa! 🛎️')" class="p-modal-btn">
+                        <i class="fas fa-hand-paper"></i>
+                        <span>Chamar Garçom</span>
+                    </button>
+                    <button onclick="abrirAvaliacao()" class="p-modal-btn">
+                        <i class="fas fa-star"></i>
+                        <span>Avaliar Atendimento</span>
+                    </button>
+                    <button onclick="servicoRapido('RECOLHER / CONTA', 'Terminei a refeição. Poderia recolher os pratos e apresentar a conta, por favor? ✨')" class="p-modal-btn">
+                        <i class="fas fa-receipt"></i>
+                        <span>Recolher / Conta</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="avalModal" class="p-modal-overlay">
+            <div class="p-modal-content">
+                <h4>Sua Experiência</h4>
+                <div class="p-stars">
+                    <i class="fas fa-star" onclick="setStar(1)"></i>
+                    <i class="fas fa-star" onclick="setStar(2)"></i>
+                    <i class="fas fa-star" onclick="setStar(3)"></i>
+                    <i class="fas fa-star" onclick="setStar(4)"></i>
+                    <i class="fas fa-star" onclick="setStar(5)"></i>
+                </div>
+                <textarea id="avalComentario" placeholder="Escreva o seu comentário aqui..."></textarea>
+                <button onclick="enviarAvaliacao()" class="p-btn-checkout-premium" style="padding: 10px;">ENVIAR FEEDBACK</button>
+                <button onclick="fecharAval()" style="background:transparent; color:#888; border:none; margin-top:15px; cursor:pointer;">Cancelar</button>
+            </div>
+        </div>
+
+        <div id="cart" class="p-side-cart">
+            <div class="p-cart-header">
+                <h2>O SEU PEDIDO</h2>
+                <button onclick="toggleCart()" class="p-close-btn">✕</button>
+            </div>
+            <div id="cartItems" class="p-cart-list"></div>
+            <div class="p-cart-footer">
+                <div class="p-total-box">
+                    <span>INVESTIMENTO TOTAL</span>
+                    <strong id="total">0 Kz</strong>
+                </div>
+                <button onclick="finalizar()" class="p-btn-checkout-premium">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>FINALIZAR PEDIDO NO WHATSAPP</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="p-magnetic-cart" onclick="toggleCart()">
+            <div class="p-cart-icon">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="p-badge cart-count">0</span>
+            </div>
+            <span class="p-cart-text">VER PEDIDO</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
