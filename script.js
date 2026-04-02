@@ -80,7 +80,7 @@ function fecharMesaModal(e) {
 function servicoRapido(tipo, texto) {
     const msg = `*PONTUZ - ${tipo}*%0A*MESA:* ${mesaNum}%0A*SOLICITAÇÃO:* ${texto}`;
     alert("O Garçom já foi notificado! Estaremos aí em instantes.");
-    window.open(`https://wa.me/244955002054?text=${msg}`, '_blank');
+    window.open(`https://wa.me/244936546532?text=${msg}`, '_blank');
     document.getElementById("mesaModal").classList.remove("show");
 }
 
@@ -108,7 +108,7 @@ function enviarAvaliacao() {
     const msg = `*PONTUZ - AVALIAÇÃO*%0A*MESA:* ${mesaNum}%0A*NOTA:* ${estrelasTexto}%0A*COMENTÁRIO:* ${coment}`;
     
     alert("Obrigado pelo seu feedback! Isso ajuda-nos a melhorar.");
-    window.open(`https://wa.me/244955002054?text=${msg}`, '_blank');
+    window.open(`https://wa.me/244936546532?text=${msg}`, '_blank');
     fecharAval();
 }
 
@@ -207,5 +207,5 @@ function finalizar() {
     let msg = `*PONTUZ - PEDIDO MESA ${mesaNum}*%0A────────────────────%0A`;
     carrinho.forEach(i => msg += `• ${i.nome}%0A`);
     msg += `────────────────────%0A*TOTAL:* ${document.getElementById("total").innerText}`;
-    window.open(`https://wa.me/244955002054?text=${msg}`);
+    window.open(`https://wa.me/244936546532?text=${msg}`);
 }
